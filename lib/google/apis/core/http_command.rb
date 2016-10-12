@@ -146,6 +146,8 @@ module Google
           self.url = url.expand(params) if url.is_a?(Addressable::Template)
           url.query_values = query.merge(url.query_values || {})
 
+          self.body = request_object.to_json
+          
           if allow_form_encoding?
             @form_encoded = true
             self.body = Addressable::URI.form_encode(url.query_values(Array))
